@@ -94,12 +94,12 @@ df2["RotPart"] = np.where((df2["DATE"].shift(1) != df2["DATE"]) & (df2["DATE"].s
 df2["RotPart"] = df2["RotPart"].astype("string")
 
 # Defining the logic to calculate Actual Ground Time
-df2["ActualGT"] = np.where((df2["RotPart"] == "head"), 0,
+df2["ActualGT"] = np.where((df2["RotPart"] == "head"), df2["AtdBOffTime"] - df2["StdBOffTime"],
+                         np.where((df2["RotPart"] == "head&tail"), df2["AtdBOffTime"] - df2["StdBOffTime"],
                          np.where((df2["RotPart"] == "body") & (df2["EarlyLandVal"].shift(1) == "0"), df2["AtdBOffTime"] - df2["AtaBOnTime"].shift(1), 
                          np.where((df2["RotPart"] == "body") & (df2["EarlyLandVal"].shift(1) == "early"), df2["AtdBOffTime"] - df2["AtaBOnTime"].shift(1), 
                          np.where((df2["RotPart"] == "tail") & (df2["EarlyLandVal"].shift(1) == "0"), df2["AtdBOffTime"] - df2["AtaBOnTime"].shift(1),
-                         np.where((df2["RotPart"] == "tail") & (df2["EarlyLandVal"].shift(1) == "early"), df2["AtdBOffTime"] - df2["AtaBOnTime"].shift(1),
-                         np.where(df2["RotPart"] == "head&tail", 0,0))))))
+                         np.where((df2["RotPart"] == "tail") & (df2["EarlyLandVal"].shift(1) == "early"), df2["AtdBOffTime"] - df2["AtaBOnTime"].shift(1),0))))))
 
 # Defining the primary key to be merged with Scheduled Ground Time table
 df2["DATE2"] = df2["DATE"].astype("string")
