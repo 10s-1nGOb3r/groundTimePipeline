@@ -116,13 +116,21 @@ AIRPORT_TOWN
 Exported to /output folder:
 File	Description
 🔹sgtDetails.csv	Scheduled GT detailed table
+
 🔹agtDetails.csv	Actual GT detailed table
+
 🔹sgtAgtDetails.csv	Merged comparison table
+
 🔹agtPerDate.csv	Daily aggregation
+
 🔹agtPerStationPerDate.csv	Station daily aggregation
+
 🔹agtPerMonth.csv	Monthly aggregation
+
 🔹agtPerStationPerMonth.csv	Station monthly aggregation
+
 🔹agtPerClassPerMonth.csv	Class monthly aggregation
+
 🔹agtPerClassPerDate.csv	Class daily aggregation
 
 ▶️ How to Run
