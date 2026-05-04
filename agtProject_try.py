@@ -107,7 +107,8 @@ df2["keyActGT"] = df2["DATE2"] + "." + df2["FLT"] + "." + df2["DEP"] + "." + df2
 df2["keyActGT"] = df2["keyActGT"].astype("string")
 
 # Merge the two tables : Scheduled Ground Time Table & Actual Ground Time Table
-df_final = pd.merge(df, df2[["keyActGT", "ActualGT"]], on="keyActGT", how="left")
+df2_clean = df2.drop_duplicates(subset=["keyActGT"])
+df_final = pd.merge(df, df2_clean[["keyActGT", "ActualGT"]], on="keyActGT", how="left")
 
 # Define the logic by comparing two fields : SchedGT & ActualGT
 df_final["AGT"] = np.where((df_final["SchedGT"] < df_final["ActualGT"]) & (df_final["FVal"] == "val"), "> SGT",
@@ -118,9 +119,9 @@ df_final["AGT"] = df_final["AGT"].astype("string")
 
 # Merge the ground table with station table
 station_db = pd.read_csv(file_path2,sep=";")
-station_db["DEP"] = station_db["DEP"].astype("string")
+station_db["STATION"] = station_db["STATION"].astype("string")
 
-df_final = pd.merge(df_final, station_db[["DEP", "TOWN", "CLASS"]], on="DEP", how="left")
+df_final = pd.merge(df_final, station_db[["STATION", "TOWN", "CLASS"]], left_on="DEP",right_on="STATION",how="left")
 
 df_final["AIRPORT_TOWN"] = df_final["DEP"] + " - " + df_final["TOWN"]
 
