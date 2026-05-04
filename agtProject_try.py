@@ -4,7 +4,7 @@ import os
 
 # Setting up the file path to be export later
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "input_try", "pyPlanGt_try.csv")
+file_path = os.path.join(script_dir, "input_try", "pyActGt_try.csv")
 file_path2 = os.path.join(script_dir, "input_try", "station_db.csv")
 save_at = os.path.join(script_dir, "output", "sgtDetails.csv")
 save_at2 = os.path.join(script_dir, "output", "agtDetails.csv")
